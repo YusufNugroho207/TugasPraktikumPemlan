@@ -1,0 +1,32 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        int num = input.nextInt();
+        Selde(num);
+    }
+    public static int rev(int num) {
+        int hasil = 0, rem;
+
+        while (num>0) {
+            rem = num % 10;
+            hasil = hasil * 10 + rem;
+            num = num / 10;
+        }
+
+        return hasil;
+    }
+
+    public static boolean Selde(int num) {
+        int selde = num;
+
+        if (selde == rev(num))
+            System.out.println(num + " adalah selde.");
+        else
+            System.out.println(num + " bukan selde.");
+
+        return true;
+    }
+}

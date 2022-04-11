@@ -1,0 +1,44 @@
+import java.util.Scanner;
+
+public class suratKaisar{
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        String alfabet = input.nextLine();
+        int key = input.nextInt();
+        System.out.println(Kaisar(alfabet, key));
+    }
+    
+    public static String Kaisar(String alfabet, int shift){
+        String chipertext="";
+        int length = alfabet.length();
+        if(shift > 26)
+            shift = shift % 26;
+        else if(shift < 0)
+            shift = (shift % 26) + 26;
+        for (int i = 0; i < length; i++)
+        {
+            char charr = alfabet.charAt(i);
+            if (Character.isLetter(charr))
+            {
+                if(Character.isUpperCase(charr)) 
+                {
+                    char ch = (char)(charr + shift);
+                    if(ch > 'Z')
+                        chipertext += (char)(charr - (26 - shift));
+                    else
+                        chipertext += ch;
+                }
+                else if (Character.isLowerCase(charr))
+                {
+                    char ch = (char)(charr + shift);
+                    if(ch > 'z')
+                        chipertext += (char)(charr - (26 - shift)); 
+                    else
+                        chipertext += ch;
+                }  
+            }else 
+                chipertext += charr;   
+        }
+        return chipertext;
+    }
+}

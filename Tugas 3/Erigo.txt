@@ -1,0 +1,65 @@
+import java.util.Scanner;
+public class Erigo{
+    public static void main(String[]args){
+        Scanner input = new Scanner(System.in);
+    
+        Baju baju = new Baju();
+        System.out.println("Baju yang tersedia : ");
+        System.out.println("Baju A dengan harga 100000");
+        System.out.println("Baju B dengan harga 125000");
+        System.out.println("Baju C dengan harga 175000");
+        
+        System.out.print("Baju yang akan anda beli bertipe : ");
+        baju.jenis = input.nextLine();
+        System.out.print("Jumlah baju yang akan anda beli adalah : ");
+        baju.jumlah = input.nextInt();
+        
+        baju.tampil();
+    }
+}
+
+class Baju{
+    String jenis;
+    int jumlah;
+    int harga;
+    final int bajuA = 100000;
+    final int bajuB = 125000;
+    final int bajuC = 175000;
+    
+    void hargaA(){
+        if(jumlah > 100){
+            harga = 100000-5000;
+        }else{
+            harga = bajuA; 
+        }
+    }
+    
+    void hargaB(){
+        if(jumlah > 100){
+            harga = 125000-5000;
+        }else{
+            harga = bajuB; 
+        }
+    }
+    
+    void hargaC(){
+        if(jumlah > 100){
+            harga = 175000-15000;
+        }else{
+            harga = bajuC; 
+        }
+    }
+    
+    void tampil(){
+        if(jenis.equalsIgnoreCase("A")){
+            hargaA();
+        }else if(jenis.equalsIgnoreCase("B")){
+            hargaB();
+        }else if(jenis.equalsIgnoreCase("C")){
+            hargaC();
+        }
+        System.out.println("Jenis yang anda beli = "+jenis);
+        System.out.println("Harga per buah       = "+harga);
+        System.out.println("Total harga          = "+harga*jumlah);
+    }
+}
