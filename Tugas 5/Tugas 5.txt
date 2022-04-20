@@ -1,0 +1,165 @@
+import java.util.ArrayList;
+public class Main{
+    public static void main(String[] args){
+
+        CarRider Ackerley = new CarRider("Ackerley",26, "081348539927");
+        CarRider Banks = new CarRider("Banks", 20, "085928741823");
+        CarRider Daisy = new CarRider("Daisy", 23, "081983749976");
+        CarRider Emilia = new CarRider("Emilia", 33, "083837668931");
+
+        CarData data = new CarData();
+        data.addCar("SUV", "AD 2916 AB", "Toyota");
+        data.addCar("MPV", "AA 2811 BD", "Daihatsu");
+        data.addCar("Electric", "B 2763 BC", "Tesla");
+        data.addCar("Sport", "D 2332 CC", "Ferrari");
+
+        data.listOfCar();
+
+        RentArchive arsip = new RentArchive();
+        arsip.Rent(Ackerley, data.carList.get(0), 5);
+        arsip.Rent(Banks, data.carList.get(2), 8);
+        arsip.Rent(Daisy, data.carList.get(1), 4);
+        arsip.Rent(Emilia, data.carList.get(0), 1);
+
+        System.out.println();
+        arsip.info();
+        
+    }
+}
+
+class Car{
+    private String carType;
+    private String polNum;
+    private String merk;
+    private boolean status;
+
+    Car(String carType, String polNum, String merk, boolean status){
+        this.carType = carType;
+        this.polNum = polNum;
+        this.merk = merk;
+        this.status = status;
+    }
+
+    public String getCarType(){
+        return carType;
+    }
+
+    public String getPolNum(){
+        return polNum;
+    }
+
+    public String getMerk(){
+        return merk;
+    }
+
+    public boolean isStatus(){
+        return status;
+    }
+
+    public void setStatus(String status){
+        this.status = Boolean.parseBoolean(status);
+    }
+}
+
+class CarRider{
+    private String name;
+    private int age ;
+    private String phone;
+
+    CarRider(String name, int age, String phone){
+        this.name = name;
+        this.age = age;
+        this.phone = phone;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public int getAge(){
+        return age;
+    }
+
+    public String getPhone(){
+        return phone;
+    }
+}
+
+class CarRent{
+    private CarRider rider;
+    private Car car;
+    private int rentDur;
+
+    CarRent(CarRider rider, Car car, int rentDur){
+        this.rider = rider;
+        this.car = car;
+        this.rentDur = rentDur;
+    }
+
+    public CarRider getRider(){
+        return rider;
+    }
+
+    public Car getCar(){
+        return car;
+    }
+
+    public int getRentDur(){
+        return rentDur;
+    }
+}
+
+class CarData{
+    ArrayList<Car> carList = new ArrayList<>();
+    public void addCar(String carType, String polNum, String merk){
+        Car newCar = new Car(carType, polNum, merk, true);
+        carList.add(newCar);
+    }
+
+    public void listOfCar(){
+        System.out.println("--------------------------------------------------");
+        System.out.println("DAFTAR MOBIL");
+        System.out.println("--------------------------------------------------");
+
+        for(Car car : carList){
+            System.out.println("TIPE MOBIL : " + car.getCarType());
+            System.out.println("NO. POLISI : " + car.getPolNum());
+            System.out.println("MERK MOBIL : " + car.getMerk());
+            System.out.println("--------------------------------------------------");
+        }
+    }
+}
+
+class RentArchive{
+    ArrayList<CarRent> rentData = new ArrayList<>();
+    public void Rent(CarRider rider, Car car, int rentDur){
+
+        if(car.isStatus()){
+            CarRent newCarRent = new CarRent(rider, car, rentDur);
+            rentData.add(newCarRent);
+            System.out.println("MOBIL BERHASIL DISEWA");
+            car.setStatus("false");
+        }else{
+            System.out.println("MAAF, MOBIL SUDAH DISEWA");
+        }
+    }
+
+    public void info(){
+        System.out.println("--------------------------------------------------");
+        System.out.println("INFORMASI PELANGGAN");
+        System.out.println("--------------------------------------------------");
+
+        for(CarRent rent : rentData){
+            System.out.println("NAMA PEMINJAM               : " + rent.getRider().getName());
+            System.out.println("UMUR PEMINJAM               : " + rent.getRider().getAge());
+            System.out.println("NOMOR TELEPHONE PEMINJAM    : " + rent.getRider().getPhone());
+            System.out.println("TIPE MOBIL                  : " + rent.getCar().getCarType());
+            System.out.println("NO POLISI                   : " + rent.getCar().getPolNum());
+            System.out.println("LAMA RENTAL                 : " + rent.getRentDur());
+            System.out.println("--------------------------------------------------");
+
+        }
+    }
+}
+
+
